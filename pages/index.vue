@@ -9,20 +9,22 @@
         class="d-flex child-flex"
         cols="6"
       >
-        <v-card flat tile class="d-flex">
-          <v-img
-            :src="book.rakuten_book_info.medium_image_url"
-            lazy-src="https://picsum.photos/id/11/100/60`"
-            aspect-ratio="1"
-            class="grey lighten-2"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular indeterminate color="grey lighten-5" />
-              </v-row>
-            </template>
-          </v-img>
-        </v-card>
+        <nuxt-link :to="{ name: 'books-id', params: { id: book.title } }">
+          <v-card flat tile class="d-flex">
+            <v-img
+              :src="book.rakuten_book_info.medium_image_url"
+              lazy-src="https://picsum.photos/id/11/100/60`"
+              aspect-ratio="1"
+              class="grey lighten-2"
+            >
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5" />
+                </v-row>
+              </template>
+            </v-img>
+          </v-card>
+        </nuxt-link>
       </v-col>
     </v-row>
   </div>
