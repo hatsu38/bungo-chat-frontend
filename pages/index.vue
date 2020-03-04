@@ -1,92 +1,44 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
+  <div>
+    <h2>ぶんごうチャット</h2>
+    <p>ぶんごうチャットは、チャットで小説が読めるサービスです</p>
+    <v-row>
+      <v-col
+        v-for="book in books"
+        :key="book.id"
+        class="d-flex child-flex"
+        cols="6"
+      >
+        <v-card flat tile class="d-flex">
+          <v-img
+            :src="book.rakuten_book_info.medium_image_url"
+            lazy-src="https://picsum.photos/id/11/100/60`"
+            aspect-ratio="1"
+            class="grey lighten-2"
           >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="grey lighten-5" />
+              </v-row>
+            </template>
+          </v-img>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
+import axios from 'axios'
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
+  data: () => ({
+    books: []
+  }),
+  async created() {
+    const res = await axios.get(
+      'https://bungo-chat-api.herokuapp.com/api/ranking'
+    )
+    this.books = res.data.books
   }
 }
 </script>
