@@ -23,6 +23,8 @@ module.exports = {
     'semi': [2, 'never'],
     'no-console': 'off',
     'vue/max-attributes-per-line': 'off',
-    "prettier/prettier": ["error", {"singleQuote": true, "semi": false}]
+    "prettier/prettier": ["error", {"singleQuote": true, "semi": false}],
+    "no-unused-vars": [1, {"vars" : "all", "args" : "after-used"} ],
+    "vue/html-self-closing": ["error", { "html": { "void": "always" } }]
   }
 }
