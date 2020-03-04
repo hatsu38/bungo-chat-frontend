@@ -11,18 +11,14 @@
       >
         <v-card flat tile class="d-flex">
           <v-img
-            :src=book.rakuten_book_info.medium_image_url
+            :src="book.rakuten_book_info.medium_image_url"
             lazy-src="https://picsum.photos/id/11/100/60`"
             aspect-ratio="1"
             class="grey lighten-2"
           >
             <template v-slot:placeholder>
-              <v-row
-                class="fill-height ma-0"
-                align="center"
-                justify="center"
-              >
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular indeterminate color="grey lighten-5" />
               </v-row>
             </template>
           </v-img>
@@ -33,7 +29,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from 'axios'
 export default {
   data: () => ({
     books: []
