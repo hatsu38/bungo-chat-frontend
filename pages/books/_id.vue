@@ -1,10 +1,12 @@
 <template>
   <div>
-    <v-app-bar fixed app>
+    <v-app-bar app>
       <v-btn icon>
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <nuxt-link to="/" dark>
+        <v-toolbar-title v-text="title" />
+      </nuxt-link>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -20,7 +22,7 @@
         </v-list>
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" class="pa-0" app>
+    <v-footer class="pa-0" app>
       <v-row no-gutters>
         <v-col cols="6" class="border outline-center" @click="moreRead">
           <div class="text-center">
@@ -59,14 +61,14 @@ export default {
   }),
   async beforeMount() {
     const res = await axios.get(
-      `http://bungo-chat-api.herokuapp.com/api/books/${this.$nuxt.$route.params.id}`
+      `https://bungo-chat-api.herokuapp.com/api/books/${this.$nuxt.$route.params.id}`
     )
     this.title = res.data.title
   },
   methods: {
     async moreRead() {
       const res = await axios.get(
-        `http://bungo-chat-api.herokuapp.com/api/books/${this.$nuxt.$route.params.id}?`,
+        `https://bungo-chat-api.herokuapp.com/api/books/${this.$nuxt.$route.params.id}?`,
         {
           params: { page: this.page, amount: 0 }
         }
@@ -79,6 +81,9 @@ export default {
 }
 </script>
 <style scoped>
+a {
+  text-decoration: none;
+}
 .message_body {
   border: 1px solid #eee;
   border-radius: 5px;
